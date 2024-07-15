@@ -13,7 +13,7 @@ pipeline {
                 checkout scmGit(
                         branches: [[name: '*/main']],
                         extensions: [],
-                        userRemoteConfigs: [[url: 'https://github.com/ganesh2soft/AYNAMS2024.git']]
+                        userRemoteConfigs: [[url: 'https://github.com/chntraining/ms.git']]
                 )
             }
         }
@@ -38,7 +38,7 @@ pipeline {
             steps {
                 script {
                     dir('mysqlhost') {
-                        bat "docker build -t ganesh2soft/mysqlhost ."
+                        bat "docker build -t deepikkaa20/mysqlhost ."
                     }
                 }
             }
@@ -53,7 +53,7 @@ pipeline {
                     projects.each { project ->
                         dir(project) {
                             echo "Dockering ${project}..."
-                            bat "docker build -t ganesh2soft/${project} ."
+                            bat "docker build -t deepikkaa20/${project} ."
                         }
                     }
 
@@ -65,14 +65,14 @@ pipeline {
         stage('Pushing Docker image') {
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'dochubganesh2soft', variable: 'DOCHUBPWD')]) {
-                        bat "docker login -u ganesh2soft -p ${DOCHUBPWD}"
+                    withCredentials([string(credentialsId: 'dochubdeepikkaa', variable: 'DOCHUBPWD')]) {
+                        bat "docker login -u deepikkaa20 -p ${DOCHUBPWD}"
                         def projects = ['apigateway', 'articlesprbootapp', 'eurekaclient', 'eurekaserver']
 
                         projects.each { project ->
                             dir(project) {
                                 echo "Dockering ${project}..."
-                                bat "docker push ganesh2soft/${project}"
+                                bat "docker push deepikkaa/${project}"
                             }
 
                         }
@@ -95,17 +95,17 @@ pipeline {
                     withsqlprojects.each { project ->
                         dir(project) {
                             echo "Loading ${project}...into Minikube "
-                            bat "minikube image load ganesh2soft/${project}"
+                            bat "minikube image load deepikkaa20/${project}"
                         }
                     }
                     notsqlprojects.each { project ->
                         dir(project) {
                             echo "Loading ${project}...into Minikube "
-                            bat "minikube image load ganesh2soft/${project}"
+                            bat "minikube image load deepikkaa20/${project}"
                         }
                     }
                     dir('mysqlhost'){
-                //  bat "minikube image load ganesh2soft/mysqlhost"
+                //  bat "minikube image load deepikkaa20/mysqlhost"
                     bat "kubectl apply -f mysqlhost-deployment.yaml"
                     bat "kubectl apply -f mysqlhost-service.yaml"
                     bat "kubectl apply -f mysqlhost-volume.yaml "
