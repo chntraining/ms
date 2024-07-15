@@ -65,14 +65,14 @@ pipeline {
         stage('Pushing Docker image') {
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'dochubdeepikkaa', variable: 'DOCHUBPWD')]) {
+                    withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'DOCHUBPWD')]) {
                         bat "docker login -u deepikkaa20 -p ${DOCHUBPWD}"
                         def projects = ['apigateway', 'articlesprbootapp', 'eurekaclient', 'eurekaserver']
 
                         projects.each { project ->
                             dir(project) {
                                 echo "Dockering ${project}..."
-                                bat "docker push deepikkaa/${project}"
+                                bat "docker push deepikkaa20/${project}"
                             }
 
                         }
