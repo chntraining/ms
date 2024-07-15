@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: aynaorder
-        image: ganesh2soft/aynaorder:latest # Replace with your Docker image name
+        image: deepikkaa20/aynaorder:latest # Replace with your Docker image name
         imagePullPolicy: IfNotPresent  
         
         ports:

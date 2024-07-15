@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: aynaapigateway
-        image: ganesh2soft/aynaapigateway:latest # Replace with your Docker image name
+        image: deepikkaa20/aynaapigateway:latest # Replace with your Docker image name
         imagePullPolicy: IfNotPresent  
         
         ports:

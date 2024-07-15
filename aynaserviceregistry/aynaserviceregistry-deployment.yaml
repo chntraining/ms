@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: aynaserviceregistry
-        image: ganesh2soft/aynaserviceregistry:latest # Replace with your Docker image name
+        image: deepikkaa20/aynaserviceregistry:latest # Replace with your Docker image name
         imagePullPolicy: IfNotPresent  
         
         ports:
